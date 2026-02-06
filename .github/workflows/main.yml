@@ -7,7 +7,7 @@ on:
 
 env:
   REGISTRY: oscar1532/dsci310-ia3-oscar-yik-docker
-  IMAGE_NAME: dockerfile-practice:latest
+  IMAGE_NAME: dockerfile-practice
 
 jobs:
   push_to_registry:
