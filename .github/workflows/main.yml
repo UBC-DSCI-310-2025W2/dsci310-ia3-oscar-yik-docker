@@ -1,8 +1,9 @@
 name: Build and Publish Docker image
 
 on:
-  release:
-    types: [published]
+  push:
+    branches:
+      - master
 
 env:
   REGISTRY: oscar1532/dsci310-ia3-oscar-yik-docker
