@@ -4,10 +4,12 @@ on:
   push:
     branches:
       - master
+    paths:
+      - 'Dockerfile'
 
 env:
-  REGISTRY: oscar1532/dsci310-ia3-oscar-yik-docker
-  IMAGE_NAME: dockerfile-practice
+  REGISTRY: oscar1532
+  IMAGE_NAME: dsci310-ia3-oscar-yik-docker
 
 jobs:
   push_to_registry:
@@ -33,6 +35,9 @@ jobs:
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=sha,format=long
+            type=raw,value=latest
 
       - name: Build and push Docker image
         id: push
@@ -47,6 +52,6 @@ jobs:
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v3
         with:
-          subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          subject-name: index.docker.io/${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
